@@ -134,12 +134,7 @@ gfeedfetcher.prototype._displayresult=function(feeds){
 	for (var i=0; i<feeds.length; i++){
 		itemurl.push(feeds[i].link)
 		itemurl.push(feeds[i].link)
-		itemtitle.push('<div class="post-preview"><a href="' + feeds[i].link + '" target="' + this.linktarget + '"><h2 class="post-title">' + feeds[i].title + '</h2>
-                        <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
-                        </h3></a><p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
-                </div>
-                <hr>')
+		itemtitle.push('<div class="post-preview"><a href="' + feeds[i].link + '" target="' + this.linktarget + '"><h2 class="post-title">' + feeds[i].title + '</h2><h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3></a><p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p></div><hr>')
 		itemlabel.push(/label/i.test(this.showoptions)? '<span class="labelfield">'+this.feeds[i].ddlabel+'</span>\n' : "")
 		itemdate.push(gfeedfetcher._formatdate(feeds[i].publishedDate, this.showoptions))
 		var itemdescriptionsingle=/description/i.test(this.showoptions)? feeds[i].content : /snippet/i.test(this.showoptions)? feeds[i].contentSnippet  : ""
@@ -195,7 +190,7 @@ gfeedfetcher.prototype._displayresult=function(feeds){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+                <a class="navbar-brand" href="index.html">Palette News</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
