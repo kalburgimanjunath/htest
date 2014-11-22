@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Title Page</title>
 
-		<!-- Bootstrap CSS -->
+		
 		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,22 +19,22 @@
 		<script type="text/javascript">
 		
 
-var gfeedfetcher_loading_image="indicator.gif" //Full URL to "loading" image. No need to config after this line!!
-google.load("feeds", "1") //Load Google Ajax Feed API (version 1)
+var gfeedfetcher_loading_image="indicator.gif" 
+google.load("feeds", "1") 
 function gfeedfetcher(divid, divClass, linktarget){
-	this.linktarget=linktarget || "" //link target of RSS entries
-	this.feedlabels=[] //array holding lables for each RSS feed
+	this.linktarget=linktarget || "" 
+	this.feedlabels=[] 
 	this.feedurls=[]
-	this.feeds=[] //array holding combined RSS feeds' entries from Feed API (result.feed.entries)
-	this.feedsfetched=0 //number of feeds fetched
+	this.feeds=[] 
+	this.feedsfetched=0 
 	this.feedlimit=5
-	this.showoptions="" //Optional components of RSS entry to show (none by default)
-	this.outputtemplate="{title} {label} {date}<br />{description}" // output template for each RSS entry
-	this.regexprules=[] // array to hold regexp rules [regex, replacestr, field_to_apply_to]
-	this.sortstring="date" //sort by "date" by default
-	document.write('<div id="'+divid+'" class="'+divClass+'"></div>') //output div to contain RSS entries
+	this.showoptions="" 
+	this.outputtemplate="{title} {label} {date}<br />{description}" 
+	this.regexprules=[] 
+	this.sortstring="date" 
+	document.write('<div id="'+divid+'" class="'+divClass+'"></div>') 
 	this.feedcontainer=document.getElementById(divid)
-	this.containertag=["li", "<li>"] // [tag to wrap around each rss entry, final tag]
+	this.containertag=["li", "<li>"] 
 	this.onfeedload=function(){}
 }
 gfeedfetcher.prototype.addFeed=function(label, url){
@@ -47,7 +47,7 @@ gfeedfetcher.prototype.filterfeed=function(feedlimit, sortstr){
 	this.sortstring=sortstr
 }
 gfeedfetcher.prototype.displayoptions=function(parts){
-	this.showoptions=parts //set RSS entry options to show ("date, datetime, time, snippet, label, description")
+	this.showoptions=parts 
 }
 gfeedfetcher.prototype.definetemplate=function(str){
 	this.outputtemplate=str
@@ -59,35 +59,31 @@ gfeedfetcher.prototype.addregexp=function(regliteral, replacewith, field){
 		field
 	])
 }
-gfeedfetcher.prototype.setentrycontainer=function(containertag, cssclass){  //set element that should wrap around each RSS 
-
-entry item
+gfeedfetcher.prototype.setentrycontainer=function(containertag, cssclass){  
 	this.containertag=[containertag.toLowerCase(), '<' + containertag.toLowerCase ()+ (cssclass? ' class="'+cssclass+'"' 
 
 : '') + ' >']
 }
 gfeedfetcher.prototype.init=function(){
-	this.feedsfetched=0 //reset number of feeds fetched to 0 (in case init() is called more than once)
-	this.feeds=[] //reset feeds[] array to empty (in case init() is called more than once)
-	this.feedcontainer.innerHTML='<img src="'+gfeedfetcher_loading_image+'" /> Retrieving RSS feed(s)'
+	this.feedsfetched=0 
+	this.feeds=[] 
+	this.feedcontainer.innerHTML='<img src="'+gfeedfetcher_loading_image+'" /> 
 	var displayer=this
-	for (var i=0; i<this.feedurls.length; i++){ //loop through the specified RSS feeds' URLs
-		var feedpointer=new google.feeds.Feed(this.feedurls[i]) //create new instance of Google Ajax Feed API
+	for (var i=0; i<this.feedurls.length; i++){ 
+		var feedpointer=new google.feeds.Feed(this.feedurls[i]) 
 		var items_to_show=(this.feedlimit<=this.feedurls.length)? 1 : Math.floor(this.feedlimit/this.feedurls.length) 
 
-//Calculate # of entries to show for each RSS feed
+
 		if (this.feedlimit%this.feedurls.length>0 && this.feedlimit>this.feedurls.length && 
 
-i==this.feedurls.length-1) //If this is the last RSS feed, and feedlimit/feedurls.length yields a remainder
-			items_to_show+=(this.feedlimit%this.feedurls.length) //Add that remainder to the number of entries to 
-
-show for last RSS feed
-		feedpointer.setNumEntries(items_to_show) //set number of items to display
+i==this.feedurls.length-1) 
+			items_to_show+=(this.feedlimit%this.feedurls.length) 
+		feedpointer.setNumEntries(items_to_show) 
 		feedpointer.load(function(label){
 			return function(r){
 				displayer._fetch_data_as_array(r, label)
 			}
-		}(this.feedlabels[i])) //call Feed.load() to retrieve and output RSS feed.
+		}(this.feedlabels[i]))
 	}
 }
 gfeedfetcher._formatdate=function(datestr, showoptions){
@@ -98,17 +94,15 @@ itemdate.toLocaleDateString() : (showoptions.indexOf("time")!=-1)? itemdate.toLo
 	return "<span class='datefield'>"+parseddate+"</span>\n"
 }
 gfeedfetcher._sortarray=function(arr, sortstr){
-	var sortstr=(sortstr=="label")? "ddlabel" : sortstr //change "label" string (if entered) to "ddlabel" instead, for 
-
-internal use
-	if (sortstr=="title" || sortstr=="ddlabel"){ //sort array by "title" or "ddlabel" property of RSS feed entries[]
+	var sortstr=(sortstr=="label")? "ddlabel" : sortstr 
+	if (sortstr=="title" || sortstr=="ddlabel"){ 
 		arr.sort(function(a,b){
 		var fielda=a[sortstr].toLowerCase()
 		var fieldb=b[sortstr].toLowerCase()
 		return (fielda<fieldb)? -1 : (fielda>fieldb)? 1 : 0
 		})
 	}
-	else{ //else, sort by "publishedDate" property (using error handling, as "publishedDate" may not be a valid date str 
+	else{ 
 
 if an error has occured while getting feed
 		try{
@@ -118,21 +112,21 @@ if an error has occured while getting feed
 	}
 }
 gfeedfetcher.prototype._fetch_data_as_array=function(result, ddlabel){	
-	var thisfeed=(!result.error)? result.feed.entries : "" //get all feed entries as a JSON array or "" if failed
-	if (thisfeed==""){ //if error has occured fetching feed
+	var thisfeed=(!result.error)? result.feed.entries : "" 
+	if (thisfeed==""){ 
 		this._signaldownloadcomplete()
 		return
 	}
-	for (var i=0; i<thisfeed.length; i++){ //For each entry within feed
-		result.feed.entries[i].ddlabel=ddlabel //extend it with a "ddlabel" property
+	for (var i=0; i<thisfeed.length; i++){ 
+		result.feed.entries[i].ddlabel=ddlabel 
 	}
-	this.feeds=this.feeds.concat(thisfeed) //add entry to array holding all feed entries
-	this._signaldownloadcomplete() //signal the retrieval of this feed as complete (and move on to next one if defined)
+	this.feeds=this.feeds.concat(thisfeed) 
+	this._signaldownloadcomplete() 
 }
 gfeedfetcher.prototype._signaldownloadcomplete=function(){
 	this.feedsfetched+=1
-	if (this.feedsfetched==this.feedurls.length){ //if all feeds fetched
-		this._displayresult(this.feeds) //display results
+	if (this.feedsfetched==this.feedurls.length){ 
+		this._displayresult(this.feeds)
 		this.onfeedload()
 	}
 }
@@ -157,7 +151,7 @@ feeds[i].title + '</a></span>\n')
 + '</span>\n' : ""
 		itemdescription.push(itemdescriptionsingle)
 	}
- 	// create temp object to store references to rss components, for access dynamically:
+ 
 	var holder={urlfield: itemurl, titlefield: itemtitle, labelfield: itemlabel, datefield: itemdate, descriptionfield: 
 
 itemdescription}
@@ -168,19 +162,17 @@ regexprules array
 		if (regexprules[i][2]=="titlefield" || regexprules[i][2]=="labelfield" || regexprules[i][2]=="datefield" || 
 
 regexprules[i][2]=="descriptionfield"){
-			var targetarray=holder[regexprules[i][2]] // reference array containing said field type (ie: 
+			var targetarray=holder[regexprules[i][2]] 
 
 itemdescription if regexprules[i][2]=="descriptionfield")
-			targetarray=targetarray.join('***delimiter***') // combine array elements before doing search and 
-
-replace
+			targetarray=targetarray.join('***delimiter***') 
 				.replace(regexprules[i][0], regexprules[i][1])
-				.split('***delimiter***') // revert back to array
+				.split('***delimiter***') 
 			holder[regexprules[i][2]]=targetarray
-			regexprules.splice(i,1) // remove this rule from regexprules
+			regexprules.splice(i,1) 
 		}
 	}
-	for (var i=0; i<feeds.length; i++){ // loop thru feeds, molding each feed entry based on template
+	for (var i=0; i<feeds.length; i++){ 
 		rssoutput+= this.containertag[1] + 
 
 this.outputtemplate.replace(/({title})|({url})|({label})|({date})|({description})/ig, function(m){
@@ -197,7 +189,7 @@ this.outputtemplate.replace(/({title})|({url})|({label})|({date})|({description}
 		}) + "</" + this.containertag[0] + ">" + "\n\n"
 	}
 	rssoutput+=(this.containertag[0]=="li")? "</ul>" : ""
-	for (var i=0; i<this.regexprules.length; i++){ // loop thru remaining regexprules array that target the entire feed 
+	for (var i=0; i<this.regexprules.length; i++){ 
 
 in general (versus specific field)
 		rssoutput=rssoutput.replace(this.regexprules[i][0], this.regexprules[i][1])
@@ -219,12 +211,10 @@ cssfeed.addFeed("yahoo", "http://rss.news.yahoo.com/rss/topstories")
 cssfeed.addFeed("BBC", "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml")
 cssfeed.addFeed("global news", "http://www.hospitalitynet.org/news/global.xml")
 cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/feed");
-							cssfeed.displayoptions("date") //show the specified additional fields
-							cssfeed.setentrycontainer("li") //Display each entry as a list (li 
-
-element)
-							cssfeed.filterfeed(500, "date") //Show 10 entries, sort by date
-							cssfeed.init() //Always call this last
+							cssfeed.displayoptions("date") 
+							cssfeed.setentrycontainer("li") 
+							cssfeed.filterfeed(500, "date") 
+							cssfeed.init() 
 							</script>
 		<div id="feeddiv"></div>
 
@@ -254,7 +244,6 @@ element)
 		}
 		</script>
 
-		<!-- jQuery -->
 		<script src="http://code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
