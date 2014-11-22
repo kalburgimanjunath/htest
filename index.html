@@ -17,17 +17,8 @@
 		<![endif]-->
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
-		// -------------------------------------------------------------------
-// gAjax RSS Feeds Displayer- By Dynamic Drive, available at: http://www.dynamicdrive.com
-// Created: July 17th, 2007
-// Updated June 14th, 10': Fixed issue in IE where labels would sometimes be associated with the incorrect feed items
-// Updated May 24th, 12': Added onfeedload event handler to run code when a RSS displayer has fully loaded 2) Script now 
+		
 
-skips the loading of a RSS feed if it's invalid (instead of alert a message)
-// Updated Sept 20th, 12': Version 2. Adds support for templating of entries' output, search and replace via regular 
-
-expressions inside any RSS field
-// -------------------------------------------------------------------
 var gfeedfetcher_loading_image="indicator.gif" //Full URL to "loading" image. No need to config after this line!!
 google.load("feeds", "1") //Load Google Ajax Feed API (version 1)
 function gfeedfetcher(divid, divClass, linktarget){
@@ -226,12 +217,13 @@ in general (versus specific field)
 cssfeed.addFeed("healthy", "http://www.health.com/health/rss")
 cssfeed.addFeed("yahoo", "http://rss.news.yahoo.com/rss/topstories")
 cssfeed.addFeed("BBC", "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml")
+cssfeed.addFeed("global news", "http://www.hospitalitynet.org/news/global.xml")
 cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/feed");
 							cssfeed.displayoptions("date") //show the specified additional fields
 							cssfeed.setentrycontainer("li") //Display each entry as a list (li 
 
 element)
-							cssfeed.filterfeed(10, "date") //Show 10 entries, sort by date
+							cssfeed.filterfeed(500, "date") //Show 10 entries, sort by date
 							cssfeed.init() //Always call this last
 							</script>
 		<div id="feeddiv"></div>
