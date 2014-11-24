@@ -23,6 +23,20 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<style type="text/css">
+			.example1class{
+
+			}
+
+			.example1class ul{
+				
+			}
+
+			.example1class ul li{
+				list-style-type: none;
+			}
+
+		</style>
 		<script type="text/javascript">
 		
 
@@ -72,7 +86,7 @@ gfeedfetcher.prototype.setentrycontainer=function(containertag, cssclass){
 gfeedfetcher.prototype.init=function(){
 	this.feedsfetched=0 
 	this.feeds=[] 
-	this.feedcontainer.innerHTML='<img src="'+gfeedfetcher_loading_image+'" /> Retrieving RSS feed(s)'
+	//this.feedcontainer.innerHTML='<img src="'+gfeedfetcher_loading_image+'" /> Retrieving RSS feed(s)'
 	var displayer=this
 	for (var i=0; i<this.feedurls.length; i++){ 
 		var feedpointer=new google.feeds.Feed(this.feedurls[i]) 
@@ -90,7 +104,41 @@ gfeedfetcher.prototype.init=function(){
 gfeedfetcher._formatdate=function(datestr, showoptions){
 	var itemdate=new Date(datestr)
 	var parseddate=(showoptions.indexOf("datetime")!=-1)? itemdate.toLocaleString() : (showoptions.indexOf("date")!=-1)? itemdate.toLocaleDateString() : (showoptions.indexOf("time")!=-1)? itemdate.toLocaleTimeString() : ""
-	return "<span class='datefield'>"+parseddate+"</span>\n"
+
+	var month = itemdate.getMonth();
+	var monthname = new Array();
+    monthname[0] = "January";
+    monthname[1] = "February";
+    monthname[2] = "March";
+    monthname[3] = "April";
+    monthname[4] = "May";
+    monthname[5] = "June";
+    monthname[6] = "July";
+    monthname[7] = "August";
+    monthname[8] = "September";
+    monthname[9] = "October";
+    monthname[10] = "November";
+    monthname[11] = "December";
+    var day = itemdate.getDate();
+
+    month = month + 1;
+
+    month = month + "";
+
+    if (month.length == 1)
+    {
+        month = "0" + month;
+    }
+
+    day = day + "";
+
+    if (day.length == 1)
+    {
+        day = "0" + day;
+    }
+
+    var blogitemdate =  monthname[month] + ' ' + day + ',' + itemdate.getFullYear();
+	return blogitemdate;
 }
 gfeedfetcher._sortarray=function(arr, sortstr){
 	var sortstr=(sortstr=="label")? "ddlabel" : sortstr //change "label" string (if entered) to "ddlabel" instead, for internal use
@@ -129,12 +177,19 @@ gfeedfetcher.prototype._signaldownloadcomplete=function(){
 }
 gfeedfetcher.prototype._displayresult=function(feeds){
 	var rssoutput=(this.containertag[0]=="li")? "<ul>\n" : ""
+	
 	gfeedfetcher._sortarray(feeds, this.sortstring)
 	var itemurl=[], itemtitle=[], itemlabel=[], itemdate=[], itemdescription=[]
+
+	itemtitle.push('<div id="test" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Modal header</h3></div><div class="modal-body"><p>One fine body…</p></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Close</button><button class="btn btn-primary">Save changes</button></div></div><script>$("#test").modal("show");<\/script>');
+
 	for (var i=0; i<feeds.length; i++){
 		itemurl.push(feeds[i].link)
 		itemurl.push(feeds[i].link)
-		itemtitle.push('<div class="post-preview"><a href="#myModal' + i + '" data-toggle="modal" target="' + this.linktarget + '"><h2 class="post-title">' + feeds[i].title + '</h2><h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3></a><p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p></div><hr><div class="modal hide" id="#myModal' + i + '"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">×</button><h3>' + feeds[i].title + '</h3></div><div class="modal-body"><p>"' + feeds[i].content + '"</p></div><div class="modal-footer"><a href="#" class="btn" data-dismiss="modal">Close</a><a href="#" class="btn btn-primary">Save changes</a></div></div><script>$("#myModal' + i + '").modal("show")<\/script>')
+		var postDate = gfeedfetcher._formatdate(feeds[i].publishedDate, this.showoptions)
+		
+		
+		itemtitle.push('<div class="post-preview"><a href="#myModal' + i + '" data-toggle="modal" ><h2 class="post-title">' + feeds[i].title + '</h2><h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3></a><p class="post-meta">Posted by <a href="#">Palette</a> on '+ postDate +'</p></div><hr><div class="modal hide" id="#myModal' + i + '"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">×</button><h3>' + feeds[i].title + '</h3></div><div class="modal-body"><p>"' + feeds[i].content + '"</p></div><div class="modal-footer"><a href="#" class="btn" data-dismiss="modal">Close</a><a href="#" class="btn btn-primary">Save changes</a></div></div><script>$("#myModal' + i + '").toggle("show");<\/script>')
 		itemlabel.push(/label/i.test(this.showoptions)? '<span class="labelfield">'+this.feeds[i].ddlabel+'</span>\n' : "")
 		itemdate.push(gfeedfetcher._formatdate(feeds[i].publishedDate, this.showoptions))
 		var itemdescriptionsingle=/description/i.test(this.showoptions)? feeds[i].content : /snippet/i.test(this.showoptions)? feeds[i].contentSnippet  : ""
