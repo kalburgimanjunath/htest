@@ -341,7 +341,7 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
 		for (var i=0; i<thefeeds.length; i++)
 		rssoutput+= "<div class='post-preview'><a data-toggle='modal' href='" + thefeeds[i].link + "'><h2 class='post-title'>"
                 
-                rssoutput+= "</h2>h3 class='post-subtitle'>Problems look mighty small from 150 miles up</h3>"
+                rssoutput+= "</h2>h3 class='post-subtitle'>" + thefeeds[i].description + "</h3>"
                 
                 rssoutput+= "</a><p class='post-meta'>Posted by <a href=''>Start Bootstrap</a> on September 24, 2014</p></div><hr><div>"+ thefeeds[i].content +"</div><div class='modal hide' id='myModal'><div class='modal-header'><button type='button' class='close' data-dismiss='modal'>×</button><h3>Modal header</h3></div><div class='modal-body'><p>"
                
