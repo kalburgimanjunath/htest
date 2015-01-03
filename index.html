@@ -410,5 +410,33 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
             </div>
         </div>
     </footer>
+    <script>
+    	var openmodals = [];
+$(function(){
+  var ts = new Date().getTime();
+  $("div.modal").each(function( d ) {
+    ts++;
+    $( this ).data( "id", ts );
+  });
+
+  // after closing > 1 level modals we want to reopen the previous level modal
+  $('div.modal').on('show', function ( d ) {
+    openmodals.push({ 'id' : $( this ).data( "id" ), 'el' : this });
+    if( openmodals.length > 1 ){
+        $( openmodals[ openmodals.length - 2 ].el ).modal('hide');
+    }
+  });
+  $('div.modal').on('hide', function ( d ) {
+    if( openmodals.length > 1 ){
+        if( openmodals[ openmodals.length - 1 ].id == $( this ).data( "id" ) ){
+            openmodals.pop(); // pop current modal 
+            $( openmodals.pop().el ).modal('show'); // pop previous modal and show, will be pushed on show 
+        }
+    } else if( openmodals.length > 0 ){
+        openmodals.pop(); // last modal closing, empty the stack
+    } 
+  });
+});
+    </script>
 	</body>
 </html>
