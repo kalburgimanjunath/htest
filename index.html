@@ -195,7 +195,7 @@ var postDate=' '+entrydate.getFullYear()+"/"+(entrydate.getMonth()+1)+"/"+entryd
 		//itemdate.push(gfeedfetcher._formatdate(feeds[i].publishedDate, this.showoptions))
 		var itemdescriptionsingle=/description/i.test(this.showoptions)? feeds[i].content : /snippet/i.test(this.showoptions)? feeds[i].contentSnippet  : ""
 		itemdescriptionsingle=(itemdescriptionsingle!="")? '<span class="descriptionfield">' + itemdescriptionsingle + '</span>\n' : ""
-		itemdescription.push(itemdescriptionsingle)
+		//itemdescription.push(itemdescriptionsingle)
 	}
  	// create temp object to store references to rss components, for access dynamically:
 	var holder={urlfield: itemurl, titlefield: itemtitle, labelfield: itemlabel, datefield: itemdate, descriptionfield: itemdescription}
