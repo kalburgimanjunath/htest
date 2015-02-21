@@ -355,6 +355,15 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
 		window.onload=function(){
 		rssfeedsetup()
 		}
+		$('*:contains("undefined")').each(function(){
+		     if($(this).children().length < 1) 
+		          $(this).html( 
+		               $(this).text().replace(
+		                    
+		                    ,'<span containsStringImLookingFor="true"></span>' 
+		               )  
+		           ) 
+		});
 		</script>
 
 		<!-- jQuery -->
