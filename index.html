@@ -364,11 +364,11 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
 		<!-- jQuery -->
 		<script src="../js/jquery-1.7.2.min.js"></script>
 		<script>
-			$('div.post-preview:contains("undefined")').each(function(){
+			$('div.post-preview:contains("undefined<br>undefined")').each(function(){
 		     if($(this).children().length > 0 ) 
 		          $(this).html( 
 		               $(this).text().replace(
-		                    /'undefined'/
+		                    /"undefined<br>undefined"/
 		                    ,'' 
 		               )  
 		           ) 
