@@ -355,7 +355,13 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
 		window.onload=function(){
 		rssfeedsetup()
 		}
-		$('*:contains("undefined")').each(function(){
+		
+		</script>
+
+		<!-- jQuery -->
+		<script src="../js/jquery-1.7.2.min.js"></script>
+		<script>
+			$('*:contains("undefined")').each(function(){
 		     if($(this).children().length < 1) 
 		          $(this).html( 
 		               $(this).text().replace(
@@ -365,10 +371,6 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
 		           ) 
 		});
 		</script>
-
-		<!-- jQuery -->
-		<script src="../js/jquery-1.7.2.min.js"></script>
-		
 
 		<!-- Bootstrap JavaScript -->
 		<script src="../js/bootstrap.min.js"></script>
