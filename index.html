@@ -214,7 +214,7 @@ var postDate=' '+entrydate.getFullYear()+"/"+(entrydate.getMonth()+1)+"/"+entryd
 		}
 	}
 	for (var i=0; i<feeds.length; i++){ // loop thru feeds, molding each feed entry based on template
-		rssoutput+= this.containertag[1] + this.outputtemplate.replace(/({title})|({url})|({label})|({date})|({description}/), function(m){
+		rssoutput+= this.containertag[1] + this.outputtemplate.replace(/({title})|({url})|({label})|({date})|({description}), function(m){
 			if (m == "{title}")
 				return holder.titlefield[i]
 			else if (m == "{url}")
@@ -225,13 +225,15 @@ var postDate=' '+entrydate.getFullYear()+"/"+(entrydate.getMonth()+1)+"/"+entryd
 				return holder.datefield[i]
 			else if (m == "{description}")
 				return holder.descriptionfield[i] + "</" + this.containertag[0] + ">" + "\n\n"
+	);
+		
 	}
 	rssoutput+=(this.containertag[0]=="li")? "</ul>" : ""
 	for (var i=0; i<this.regexprules.length; i++){ // loop thru remaining regexprules array that target the entire feed in general (versus specific field)
 		rssoutput=rssoutput.replace(this.regexprules[i][0], this.regexprules[i][1])
 	}
 	this.feedcontainer.innerHTML=rssoutput;
-	}
+	
 }
 </script>
 
