@@ -231,6 +231,7 @@ var postDate=' '+entrydate.getFullYear()+"/"+(entrydate.getMonth()+1)+"/"+entryd
 		rssoutput=rssoutput.replace(this.regexprules[i][0], this.regexprules[i][1])
 	}
 	this.feedcontainer.innerHTML=rssoutput;
+	}
 }
 </script>
 
@@ -356,6 +357,9 @@ cssfeed.addFeed("healthy-happy", "http://www.health.com/health/healthy-happy/fee
 		window.onload=function(){
 		rssfeedsetup();
 		}
+		}
+		
+		
 		
 		</script>
 
