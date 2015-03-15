@@ -224,8 +224,7 @@ var postDate=' '+entrydate.getFullYear()+"/"+(entrydate.getMonth()+1)+"/"+entryd
 			else if (m == "{date}")
 				return holder.datefield[i]
 			else if (m == "{description}")
-				return holder.descriptionfield[i]
-		}) + "</" + this.containertag[0] + ">" + "\n\n"
+				return holder.descriptionfield[i] + "</" + this.containertag[0] + ">" + "\n\n"
 	}
 	rssoutput+=(this.containertag[0]=="li")? "</ul>" : ""
 	for (var i=0; i<this.regexprules.length; i++){ // loop thru remaining regexprules array that target the entire feed in general (versus specific field)
